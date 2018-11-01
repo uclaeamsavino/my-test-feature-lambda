@@ -1,0 +1,127 @@
+# Welcome to Serverless!
+#
+# This file is the main config file for your service.
+# It's very minimal at this point and uses default values.
+# You can always add more config options for more control.
+# We've included some commented out config examples here.
+# Just uncomment any of them to get that config option.
+#
+# For full config options, check the docs:
+#    docs.serverless.com
+#
+# Happy Coding!
+
+# RENAME_ME with your service name - which is the same name as your git submodule (IE - my-cool-new-feature)
+# This will be pre-pended to your lambda function name in the AWS Console and serve as a namespace for lamdas
+service: csharp-starter-lambda
+
+provider:
+  name: aws
+  region: us-west-2
+  runtime: dotnetcore2.1
+
+# you can overwrite defaults here
+#  stage: dev
+#  region: us-east-1
+
+# you can add statements to the Lambda function's IAM Role here
+#  iamRoleStatements:
+#    - Effect: "Allow"
+#      Action:
+#        - "s3:ListBucket"
+#      Resource: { "Fn::Join" : ["", ["arn:aws:s3:::", { "Ref" : "ServerlessDeploymentBucket" } ] ]  }
+#    - Effect: "Allow"
+#      Action:
+#        - "s3:PutObject"
+#      Resource:
+#        Fn::Join:
+#          - ""
+#          - - "arn:aws:s3:::"
+#            - "Ref" : "ServerlessDeploymentBucket"
+#            - "/*"
+
+# you can define service wide environment variables here
+#  environment:
+#    variable1: value1
+
+# you can add packaging information here
+package:
+  artifact: bin/release/netcoreapp2.1/deploy-package.zip
+#  exclude:
+#    - exclude-me.js
+#    - exclude-me-dir/**
+
+functions:
+  # RENAME_ME with your function name
+  lookup:
+    # RENAME_ME with your namespace, class and handler name
+    handler: CsharpHandlers::UCLA.EA.LambdaStarter.CsharpStarterHandler::LookupCrmUser
+
+  # NOTE: you probably won't have two handlers - but if you do this is how to do it
+  helloworld:
+    handler: CsharpHandlers::UCLA.EA.LambdaSimpleStarter.SimpleHandler::Hello
+
+#    The following are a few example events you can configure
+#    NOTE: Please make sure to change your handler code to work with those events
+#    Check the event documentation for details
+#    events:
+#      - http:
+#          path: users/create
+#          method: get
+#      - s3: ${env:BUCKET}
+#      - schedule: rate(10 minutes)
+#      - sns: greeter-topic
+#      - stream: arn:aws:dynamodb:region:XXXXXX:table/foo/stream/1970-01-01T00:00:00.000
+#      - cloudwatchEvent:
+#          event:
+#            source:
+#              - "aws.ec2"
+#            detail-type:
+#              - "EC2 Instance State-change Notification"
+#            detail:
+#              state:
+#                - pending
+#      - cloudwatchLog: '/aws/lambda/hello'
+#      - cognitoUserPool:
+#          pool: MyUserPool
+#          trigger: PreSignUp
+
+#    Define function environment variables here
+#    environment:
+#      variable2: value2
+
+
+#### STEP FUNCTION EXAMPLES ########
+# stepFunctions:
+#   stateMachines:
+#     atm-finder-v2:
+#       definition:
+#         Comment: "Find an a location and save it to search DB"
+#         StartAt: FindGeocode
+#         States:
+#           FindGeocode:
+#             Type: Task
+#             Resource: "arn:aws:lambda:us-west-2:906624224980:function:atm-finder-dev-findGeocode"
+#             End: true
+#           # ChoiceState:
+#           #   Type: Choice
+#           #   Choices:
+#           #     - Variable: "$.searchable"
+#           #       BooleanEquals: true
+#           #       Next: PushToAlgolia
+#           #     - Variable: "$.searchable"
+#           #       BooleanEquals: true
+#           #       Next: LocationFailed
+#           # PushToAlgolia:
+#           #   Type: Task
+#           #   Resource: "arn:aws:lambda:us-west-2:906624224980:function:atm-finder-dev-pushToAlgolia"
+#           #   End: true
+#           # LocationFailed:
+#           #   Type: Task
+#           #   Resource: "arn:aws:lambda:us-west-2:906624224980:function:atm-finder-dev-locationFailed" 
+#           #   End: true
+
+# plugins: 
+#   - serverless-step-functions
+#   - serverless-pseudo-parameters
+
