@@ -9,7 +9,7 @@ using UCLA.EA.Blackbaud;
 using UCLA.EA.TestingLib;
 
 /**
-* Every Lambda should live in its own namespace - to prevent accidental dependencies between lambdas
+* Every Lambda should live in its own namespace - to prevent accidental dependencies between lambdas  
 **/
 namespace UCLA.EA.Lambda.CsharpStarter
 {
